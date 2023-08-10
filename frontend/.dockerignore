@@ -1,0 +1,23 @@
+# Files and directories to exclude from Docker image build
+node_modules
+.dockerignore
+.git
+.next/cache
+.out
+.vscode
+npm-debug.log
+yarn-error.log
+.DS_Store
+*.log
+*.md
+*.markdown
+*.gitignore
+*.gitattributes
+*.editorconfig
+*.eslintrc
+*.eslintignore
+*.prettierrc
+*.npmrc
+*.yarnrc
+*.lock
+.DS_Store?

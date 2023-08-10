@@ -2,15 +2,15 @@ FROM node:current-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json ./
 
-RUN npm install
+RUN yarn install
 
 COPY . .
 
 ENV PORT=5000
 
-RUN npm run build
+RUN yarn build
 EXPOSE $PORT
 
-CMD ["npm", "start:dev"]
+CMD ["yarn", "start:dev"]
