@@ -10,7 +10,6 @@ COPY . .
 
 ENV PORT=5000
 
-RUN yarn build
 EXPOSE $PORT
 
 CMD ["yarn", "start:dev"]
