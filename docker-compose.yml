@@ -1,6 +1,29 @@
 version: '3.8'
 
 services:
+  backend:
+    container_name: backend
+    build: 
+      context: ./backend
+      dockerfile: backend.dockerfile
+    ports:
+      - '5000:5000'
+    depends_on:
+      - keycloak
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: frontend.dockerfile
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+
+
   keycloak:
     container_name: keycloak
     build: 
@@ -8,3 +31,4 @@ services:
       dockerfile: keycloak.dockerfile
     ports:
       - '8080:8080'
+  
