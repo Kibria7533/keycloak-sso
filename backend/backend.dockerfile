@@ -13,4 +13,4 @@ ENV PORT=5000
 RUN npm run build
 EXPOSE $PORT
 
-CMD ["npm", "start"]
+CMD ["npm", "start:dev"]
