@@ -9,10 +9,7 @@ services:
     ports:
       - '5000:5000'
     volumes:
-      - type: bind
-        source: ./backend
-        target: /opt/app/backend
-
+      - ./backend :/app
     depends_on:
       - keycloak
 
@@ -23,11 +20,14 @@ services:
       dockerfile: frontend.dockerfile
     ports:
       - '3000:3000'
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /app
     stdin_open: true
     tty: true
     depends_on:
       - backend
-
 
   keycloak:
     container_name: keycloak
