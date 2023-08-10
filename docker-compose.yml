@@ -8,6 +8,11 @@ services:
       dockerfile: backend.dockerfile
     ports:
       - '5000:5000'
+    volumes:
+      - type: bind
+        source: ./backend
+        target: /opt/app/backend
+
     depends_on:
       - keycloak
 
@@ -26,7 +31,7 @@ services:
 
   keycloak:
     container_name: keycloak
-    build: 
+    build:
       context: ./keycloak
       dockerfile: keycloak.dockerfile
     ports:
