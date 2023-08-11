@@ -16,7 +16,6 @@ export default function Navbar() {
         const redirectUri = encodeURIComponent('http://localhost:3000/profile');
         const authUrl = `${keycloakUrl}/protocol/openid-connect/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code`;
 
-        // Redirect to Keycloak for authentication
         window.location.href = authUrl;
 
     };
