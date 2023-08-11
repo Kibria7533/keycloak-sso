@@ -1,3 +1,4 @@
+'use client';
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -5,9 +6,20 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Link from "next/link";
-import LoginButton from "@/components/LoginButton";
+
 
 export default function Navbar() {
+    const handleAuthClick = () => {
+
+        const keycloakUrl = 'http://localhost:8080/auth/realms/dev';
+        const clientId = 'dev-client';
+        const redirectUri = encodeURIComponent('http://localhost:3000/profile');
+        const authUrl = `${keycloakUrl}/protocol/openid-connect/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code`;
+
+        // Redirect to Keycloak for authentication
+        window.location.href = authUrl;
+
+    };
   return (
     <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static">
@@ -18,7 +30,7 @@ export default function Navbar() {
           </Typography>
         </Link>
         <Box>
-          <LoginButton/>
+         <Button color="inherit" onClick={handleAuthClick}>Login</Button>
           <Button color="inherit">Signup</Button>
           <Link href="/profile" passHref>
             <Button color="inherit">Profile</Button>
