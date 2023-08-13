@@ -53,7 +53,7 @@ services:
       # Mysql Config
       KC_DB: mysql # db vendor
       KC_DB_URL_HOST: db_mysql # docker mysql container name
-      KC_DB_URL_DATABASE: keycloak_db # db name
+      KC_DB_URL_DATABASE: keycloak_db # db name (manually create if not exist)
       KC_DB_URL_PORT: 3306 # db container docker port (Not local machine mapped port)
       KC_DB_USERNAME: root # db user
       KC_DB_PASSWORD: root # db pass
