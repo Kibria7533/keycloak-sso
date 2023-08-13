@@ -1,5 +1,3 @@
-'use client'
-
 import Keycloak from 'keycloak-js';
 
 const keycloakConfig = {
@@ -9,6 +7,6 @@ const keycloakConfig = {
     // redirectUri: 'http://localhost:3000'
 };
 
-const keycloak2 = new Keycloak(keycloakConfig);
+const keycloak= new Keycloak(keycloakConfig);
 
-export default keycloak2;
+export default keycloak;
