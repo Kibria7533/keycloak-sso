@@ -1,42 +1,37 @@
-#version: '3.8'
-#
-#services:
-#  backend:
-#    container_name: backend
-#    build:
-#      context: ./backend
-#      dockerfile: backend.dockerfile
-#    ports:
-#      - '5000:5000'
-#    volumes:
-#      - ./backend:/app
-#    depends_on:
-#      - keycloak
-#
-#  frontend:
-#    container_name: frontend
-#    build:
-#      context: ./frontend
-#      dockerfile: frontend.dockerfile
-#    ports:
-#      - '3000:3000'
-#    volumes:
-#      - type: bind
-#        source: ./frontend
-#        target: /app
-#    stdin_open: true
-#    tty: true
-#    depends_on:
-#      - backend
-
-
-#---INSTALL MYSQL---
-#  docker volume create mysql_volume
-#  docker network create mysql_network
-#  docker run -d --name db_mysql -p 3306:3306 -p 33060:33060 --network mysql_network -v mysql_volume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root --restart=always mysql
-
 version: '3.9'
+#
 services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: backend.dockerfile
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - keycloak-dev
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: frontend.dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /app
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+
+
+
+
   keycloak-dev:
     image: quay.io/keycloak/keycloak:22.0.1
     ports:
