@@ -1,16 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import Keycloak from "keycloak-js";
-import keycloak from "../Keycloak/Keycloak";
+import React, {useState, useEffect, useRef} from "react";
 import client from "../Keycloak/Keycloak";
 
-// const keycloakConfig = {
-//     url: 'http://localhost:7020/',
-//     realm: 'google',
-//     clientId: 'google-cli',
-//     // redirectUri: 'http://localhost:3000'
-// };
-//
-// const client= new Keycloak(keycloakConfig);
 
 const useAuth = () => {
     const isRun = useRef(false);
@@ -22,10 +12,11 @@ const useAuth = () => {
 
         isRun.current = true;
         client
-            .init()
+            .init({
+                checkLoginIframe: false
+            })
             .then((authenticated) => {
                 setLogin(authenticated);
-
             });
     }, []);
 
