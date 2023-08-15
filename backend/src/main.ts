@@ -1,8 +1,14 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import {NestFactory} from '@nestjs/core';
+import {AppModule} from './app.module';
+import * as dotenv from 'dotenv';
+import * as  cors from 'cors';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(5000);
+
+    dotenv.config();
+    const app = await NestFactory.create(AppModule);
+    app.use(cors());
+    await app.listen(5000);
 }
+
 bootstrap();
