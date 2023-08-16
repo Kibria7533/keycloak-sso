@@ -37,6 +37,7 @@ services:
 
 
   keycloak-dev:
+    container_name: keycloak-dev
     image: quay.io/keycloak/keycloak:22.0.1
     ports:
       - "7020:8080"
@@ -47,15 +48,41 @@ services:
 #    restart: unless-stopped
     environment:
       # Keycloak Config
+      DEBUG: true
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+#      KEYCLOAK_IMPORT: /tmp/realm-export.json
+#      JAVA_OPTS: "-Dkeycloak:import=/tmp/example-realm.json"
+#      KEYCLOAK_MIGRATION_STRATEGY: OVERWRITE_EXISTING
       # Mysql Config
       KC_DB: mysql # vendor
       KC_DB_URL_HOST: db_mysql # mysql container name
       KC_DB_URL_DATABASE: keycloak_db # db_name (manually create if it doesn't exist)
-      KC_DB_URL_PORT: 3306 # container docker port (Not local machine mapped port)
+      KC_DB_URL_PORT: 3306 # container docker port (Not local machine mapped port) (Not required)
       KC_DB_USERNAME: root # db_user
       KC_DB_PASSWORD: root # db_pass
+#    volumes:
+#      - ./keycloak/realm-export.json:/tmp/realm-export.json
+#    command:
+#      - "-b 0.0.0.0"
+#      - "-Dkeycloak.migration.action=import"
+#      - "-Dkeycloak.migration.provider=singleFile"
+#      - "-Dkeycloak.migration.file=/Users/msn/Downloads/realm-export.json"
+#      - "-Dkeycloak.migration.strategy=IGNORE_EXISTING"
+
+
+
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog:v1.0.1
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    volumes:
+      - mailhog_volume:/app/data
+
+volumes:
+  mailhog_volume:
 
 networks:
   mysql_network:
