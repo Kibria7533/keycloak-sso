@@ -13,16 +13,16 @@ services:
 #    depends_on:
 #      - keycloak-dev
 #
-#  frontend:
-#    container_name: frontend
+#  google:
+#    container_name: google
 #    build:
-#      context: ./frontend
-#      dockerfile: frontend.dockerfile
+#      context: ./google
+#      dockerfile: google.dockerfile
 #    ports:
 #      - '3000:3000'
 #    volumes:
 #      - type: bind
-#        source: ./frontend
+#        source: ./google
 #        target: /app
 #    stdin_open: true
 #    tty: true
