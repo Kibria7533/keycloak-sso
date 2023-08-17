@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from "react";
 
-import client from "../Keycloak/Keycloak";
+import {client} from "../utils/keycloak";
 
 const useAuth = (): [boolean] => {
     const isRun = useRef(false);

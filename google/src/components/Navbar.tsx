@@ -5,18 +5,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-import {getSSOLoginURL, getSSOLogoutURL} from "../lib/Keycloak/KeycloakHelpers";
-
-
-
+import {getSSOLogoutURL} from "../hooks/useKeycloak";
+import {KEYCLOAK_LOGIN_URL} from "../utils/keycloak";
+import {getAccessToken} from "../utils/storage";
 
 const Navbar: React.FC = () => {
     const [token, setToken] = useState<any>()
-    const LOGIN_URL = getSSOLoginURL()
-
 
     useEffect(() => {
-        const token = localStorage.getItem('access_token');
+        const token = getAccessToken();
         setToken(token)
     }, []);
 
@@ -32,7 +29,7 @@ const Navbar: React.FC = () => {
                     <Box>
                         {
                             !token && (
-                                <Link href={LOGIN_URL} underline="none">
+                                <Link href={KEYCLOAK_LOGIN_URL} underline="none">
                                     <Button sx={{color: "#fff"}}>Login</Button>
                                 </Link>
                             )
@@ -43,7 +40,7 @@ const Navbar: React.FC = () => {
                             )
                         }
 
-                        {token && (<Link href="/profile" underline="none">
+                        {token && (<Link href="/google/src/pages/Profile" underline="none">
                             <Button color="inherit" sx={{color: "#fff"}}>Profile</Button>
                         </Link>)}
 
@@ -53,7 +50,6 @@ const Navbar: React.FC = () => {
                                     onClick={() => window.location.href = getSSOLogoutURL()}>
                                 Logout</Button>)
                         }
-
                     </Box>
                 </Toolbar>
             </AppBar>
