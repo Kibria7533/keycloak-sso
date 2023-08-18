@@ -56,7 +56,7 @@ export const getSSOTokenURL = async (redirectUrl: any, authorizationCode: any): 
         expirationDate.setDate(expirationDate.getDate() + 7);
 
         const {data} = await axios.post(
-            'http://localhost:5000/public/back-channel/keycloak-auth-token',
+            'http://localhost:5000/auth/token',
             {
                 redirect_uri: encodeURI(redirectUrl.toString()),
                 code: authorizationCode,

@@ -19,7 +19,7 @@ export const client = new Keycloak(keycloakConfig);
 // export const KEYCLOAK_TOKEN_URL = KEYCLOAK_HOST + "/public/back-channel/keycloak-auth-token"
 
 // export const KEYCLOAK_TOKEN_URL: string = KEYCLOAK_HOST + "/realms/" + KEYCLOAK_REALM + "/protocol/openid-connect/token"
-export const KEYCLOAK_TOKEN_URL: string = BACKEND_BASE_URL + "/public/back-channel/keycloak-auth-token"
+export const KEYCLOAK_TOKEN_URL: string = BACKEND_BASE_URL + "/auth/token"
 // export const KEYCLOAK_TOKEN_URL: string = "http://lcoalhost:5000/public/back-channel/keycloak-auth-token"
 
 export const KEYCLOAK_LOGIN_URL: string = KEYCLOAK_HOST + "/realms/" + KEYCLOAK_REALM + "/protocol/openid-connect/auth?" +
