@@ -5,6 +5,9 @@ docker compose up
 ```bash
 docker compose up --build
 ```
+```bash
+docker compose down
+```
 
 ## <span style="color:Teal">Documents</span>
 
