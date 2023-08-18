@@ -1,18 +1,19 @@
 import axios from "axios";
-import {clearLoginInfo, CONST_ID_TOKEN, getIdToken} from "../utils/storage";
+import {clearLoginInfo, getIdToken} from "../utils/storage";
 import {
-    KEYCLOAK_CLIENT_ID, KEYCLOAK_CLIENT_SECRET,
-    KEYCLOAK_HOST, KEYCLOAK_KEYCLOAK_LOGOUT_REDIRECT_URI,
+    KEYCLOAK_CLIENT_ID,
+    KEYCLOAK_HOST,
+    KEYCLOAK_KEYCLOAK_LOGOUT_REDIRECT_URI,
     KEYCLOAK_REALM,
-    KEYCLOAK_REDIRECT_URI,
     KEYCLOAK_TOKEN_URL
-} from "../utils/keycloak";
+} from "../utils/keycloak-urls";
 
-export const axiosInstance = axios.create()
-// headers: {
-//     Accept: 'application/json',
-//     "Content-Type": "application/json",
-// },
+export const axiosInstance = axios.create({
+    headers: {
+        Accept: 'application/json',
+        "Content-Type": "application/json",
+    }
+})
 
 
 export const getSSOLogoutURL = () => {
@@ -25,7 +26,7 @@ export const getSSOLogoutURL = () => {
         encodeURIComponent(KEYCLOAK_KEYCLOAK_LOGOUT_REDIRECT_URI.toString() as any);
 
     if (getIdToken()) {
-        url += '&id_token_hint=' +  encodeURIComponent(getIdToken() as any);
+        url += '&id_token_hint=' + encodeURIComponent(getIdToken() as any);
     }
 
     clearLoginInfo()
@@ -33,42 +34,36 @@ export const getSSOLogoutURL = () => {
     return url;
 };
 
-// export const getKeycloakToken = async (authorizationCode: any): Promise<any> => {
-//     return axiosInstance.post(KEYCLOAK_TOKEN_URL, {}, {
-//         method: "POST",
-//         headers: {
-//             'Content-Type': 'application/x-www-form-urlencoded',
-//         },
-//         params: {
-//             grant_type: 'authorization_code',
-//             client_id: KEYCLOAK_CLIENT_ID,
-//             client_secret: KEYCLOAK_CLIENT_SECRET,
-//             redirect_uri: encodeURI(KEYCLOAK_REDIRECT_URI),
-//             code: authorizationCode,
-//         }
-//     });
-// }
-
-
-export const getSSOTokenURL = async (redirectUrl: any, authorizationCode: any): Promise<any> => {
-    try {
-        const expirationDate = new Date();
-        expirationDate.setDate(expirationDate.getDate() + 7);
-
-        const {data} = await axios.post(
-            'http://localhost:5000/auth/token',
-            {
-                redirect_uri: encodeURI(redirectUrl.toString()),
-                code: authorizationCode,
-            }
-        );
-        return data
-    } catch (error) {
-        console.error('Error fetching auth token:', error);
-    }
+export const getKeycloakToken = async (values: any): Promise<any> => {
+    return axiosInstance.post(KEYCLOAK_TOKEN_URL, values, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    });
 }
 
-
+//
+// export const getSSOTokenURL = async (redirectUrl: any, authorizationCode: any): Promise<any> => {
+//     try {
+//         const expirationDate = new Date();
+//         expirationDate.setDate(expirationDate.getDate() + 7);
+//
+//         console.log(KEYCLOAK_TOKEN_URL)
+//         console.log(KEYCLOAK_TOKEN_URL == "http://localhost:5000/auth/token")
+//
+//         const {data} = await axios.post(
+//             KEYCLOAK_TOKEN_URL,
+//             {
+//                 redirect_uri: encodeURI(redirectUrl.toString()),
+//                 code: authorizationCode,
+//             }
+//         );
+//         return data
+//     } catch (error) {
+//         console.error('Error fetching auth token:', error);
+//     }
+// }
 
 
 // export const getSSOLoginURL = () => {

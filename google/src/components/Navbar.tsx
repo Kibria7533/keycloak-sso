@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -6,16 +6,11 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import {getSSOLogoutURL} from "../hooks/useKeycloak";
-import {KEYCLOAK_LOGIN_URL} from "../utils/keycloak";
-import {getAccessToken} from "../utils/storage";
+import {KEYCLOAK_LOGIN_URL} from "../utils/keycloak-urls";
+import useAuth from "../hooks/useAuth";
 
 const Navbar: React.FC = () => {
-    const [token, setToken] = useState<any>()
-
-    useEffect(() => {
-        const token = getAccessToken();
-        setToken(token)
-    }, []);
+    const {accessToken} = useAuth()
 
     return (
         <Box sx={{flexGrow: 1}}>
@@ -28,24 +23,24 @@ const Navbar: React.FC = () => {
                     </Link>
                     <Box>
                         {
-                            !token && (
+                            !accessToken && (
                                 <Link href={KEYCLOAK_LOGIN_URL} underline="none">
                                     <Button sx={{color: "#fff"}}>Login</Button>
                                 </Link>
                             )
                         }
                         {
-                            !token && (
+                            !accessToken && (
                                 <Button color="inherit">Signup</Button>
                             )
                         }
 
-                        {token && (<Link href="/google/src/pages/Profile" underline="none">
+                        {accessToken && (<Link href="/profile" underline="none">
                             <Button color="inherit" sx={{color: "#fff"}}>Profile</Button>
                         </Link>)}
 
 
-                        {token && (
+                        {accessToken && (
                             <Button color="inherit" sx={{color: "#fff"}}
                                     onClick={() => window.location.href = getSSOLogoutURL()}>
                                 Logout</Button>)

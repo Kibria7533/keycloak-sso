@@ -1,14 +1,15 @@
 import React, {Fragment, useEffect, useRef} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
-import {getSSOTokenURL} from "../hooks/useKeycloak";
-import {getAccessToken, setAccessToken, setIdToken, setRefreshToken} from "../utils/storage";
+import {getKeycloakToken} from "../hooks/useKeycloak";
+import useAuth from "../hooks/useAuth";
+
 
 const Profile: React.FC = () => {
-    const location = useLocation();
+    const { setAccessToken, setRefreshToken, setIdToken} = useAuth()
     const navigate = useNavigate();
+    const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
 
-    const token= getAccessToken();
     const authorizationCode = queryParams.get('code')
     const redirectUrl = process.env.REACT_APP_KEYCLOAK_REDIRECT_URI || ''
 
@@ -19,25 +20,25 @@ const Profile: React.FC = () => {
 
         const fetchData = async () => {
             try {
-                // const data = await getKeycloakToken(authorizationCode)
-                const data = await getSSOTokenURL(redirectUrl, authorizationCode)
-                console.log("response  => ", data)
+                const values = {
+                    redirect_uri: encodeURI(redirectUrl.toString()),
+                    code: authorizationCode,
+                }
+
+                const { data } = await getKeycloakToken(values)
                 setAccessToken(data?.access_token)
                 setRefreshToken(data?.refresh_token)
                 setIdToken(data?.id_token)
-                // navigate(0)
-                navigate('/profile') // todo Redirect without previous history
+                navigate('/profile', { replace: true });
             } catch (e) {
                 console.log(e)
             }
         }
 
-        fetchData()
+        authorizationCode && fetchData()
 
         // @ts-ignore
         isMounted.current = true
-
-        // if(FLAG && !token) navigate('/')
     }, []);
 
     return (

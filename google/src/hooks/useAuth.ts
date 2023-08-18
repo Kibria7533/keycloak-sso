@@ -1,26 +1,12 @@
-import {useState, useEffect, useRef} from "react";
+import {useContext} from "react";
+import {AuthContext} from "./context/AuthContext";
 
-import {client} from "../utils/keycloak";
-
-const useAuth = (): [boolean] => {
-    const isRun = useRef(false);
-    const [token, setToken] = useState<string | null>(null);
-    const [isLogin, setLogin] = useState<boolean>(false);
-
-    useEffect(() => {
-        if (isRun.current) return;
-
-        isRun.current = true;
-        client
-            .init({
-                checkLoginIframe: false,
-            })
-            .then((authenticated) => {
-                setLogin(authenticated);
-            });
-    }, []);
-
-    return [isLogin];
+const useAuth = () => {
+    // const context = useContext(AuthContext);
+    // if (!context) {
+    //     throw new Error('useAuth must be used within an AuthProvider');
+    // }
+    return useContext(AuthContext);
 };
 
 export default useAuth;

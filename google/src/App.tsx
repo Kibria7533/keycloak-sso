@@ -1,19 +1,13 @@
-import React, {Fragment} from 'react';
-import Navbar from "./components/Navbar";
+import React from 'react';
 import {Route, Routes,} from 'react-router-dom';
-import Profile from "./pages/Profile";
-import Home from "./pages/Home";
+import AppRoutes from "./Routes";
 
 
 function App() {
     return (
-        <Fragment>
-            <Navbar/>
-            <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/profile" element={<Profile/>}/>
-            </Routes>
-        </Fragment>
+        <Routes>
+            <Route path="/*" element={<AppRoutes/>}/>
+        </Routes>
     );
 }
 
