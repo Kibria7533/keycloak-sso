@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {FrontendBackChannelModule} from "./modules/FrontendBackChannel/frontend.back.channel.module";
+import {AuthModule} from "./module/auth/auth.module";
 import {APP_INTERCEPTOR} from "@nestjs/core";
 import {ResponseInterceptor} from "./interceptor/response.interceptor";
 
 @Module({
-  imports: [FrontendBackChannelModule],
+  imports: [AuthModule],
   controllers: [AppController],
   providers: [AppService,  {
     provide: APP_INTERCEPTOR,

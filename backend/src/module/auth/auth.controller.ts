@@ -1,16 +1,15 @@
 import {Controller, Inject, Post, Req, Res} from "@nestjs/common";
-import {FrontendBackChannelAppService} from "./frontend.back.channel.service";
+import {FrontendBackChannelAppService} from "./auth.service";
 
 
 
-@Controller('public/back-channel')
-export class FrontendBackChannelController  {
+@Controller('auth')
+export class AuthController {
     @Inject()
     private readonly frontendBackChannelAppService: FrontendBackChannelAppService;
 
-    @Post('keycloak-auth-token')
+    @Post('token')
     async getKeycloakAuthToken(@Req() req:any, @Res() res:any) {
-
         return  this.frontendBackChannelAppService.getKeycloakAuthToken(req, res);
     }
 }
