@@ -1,23 +1,26 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {Inject, Injectable, NotFoundException} from '@nestjs/common';
 import axios from 'axios';
-import * as process from "process";
+import {AsyncLocalStorage} from "async_hooks";
+import {KEYCLOAK_CLIENT_ID, KEYCLOAK_CLIENT_SECRET, KEYCLOAK_HOST_URL, KEYCLOAK_REALM} from "../../utils/constants";
 
 
 @Injectable()
-export class FrontendBackChannelAppService {
-    constructor() {
-    }
+export class AuthService {
+
+    @Inject()
+    private readonly als: AsyncLocalStorage<any>
+
 
     getKeycloakTokenURL = () => {
-        return `${process.env.APP_KEYCLOAK_HOST}/realms/${process.env.APP_KEYCLOAK_REALM}/protocol/openid-connect/token`;
+        return `${KEYCLOAK_HOST_URL}/realms/${KEYCLOAK_REALM}/protocol/openid-connect/token`;
     }
 
     async getKeycloakAuthToken(req: any, res: any) {
 
         const params = {
             grant_type: 'authorization_code',
-            client_id: process.env.APP_KEYCLOAK_CLIENT_ID,
-            client_secret: process.env.APP_KEYCLOAK_CLIENT_SECRET,
+            client_id: KEYCLOAK_CLIENT_ID,
+            client_secret: KEYCLOAK_CLIENT_SECRET,
             redirect_uri: req.body.redirect_uri,
             code: req.body.code,
         }
@@ -35,14 +38,22 @@ export class FrontendBackChannelAppService {
 
             return res.status(200).json(response.data);
         } catch (e: any) {
-            if (e.response) {
-                console.log('Response Data:', e.response.data);
-                console.log('Response Status:', e.response.status);
-            } else {
-                console.log('Error:', e.message);
-            }
+            console.log('Error:', e.message);
             throw new NotFoundException(e.message);
         }
+    }
+
+    async getUser(req: any, res: any) {
+        try {
+            const user = this.als.getStore();
+            if (!user) throw new NotFoundException("Profile data not found")
+            // console.log('user profile =>', user)
+            return user
+        } catch (error) {
+            console.log('Profile data error =>', error)
+            throw error
+        }
+
     }
 
 

@@ -5,7 +5,8 @@ import {
     KEYCLOAK_HOST,
     KEYCLOAK_KEYCLOAK_LOGOUT_REDIRECT_URI,
     KEYCLOAK_REALM,
-    KEYCLOAK_TOKEN_URL
+    KEYCLOAK_TOKEN_URL,
+    KEYCLOAK_USER_URL
 } from "../utils/keycloak-urls";
 
 export const axiosInstance = axios.create({
@@ -41,6 +42,21 @@ export const getKeycloakToken = async (values: any): Promise<any> => {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
     });
+}
+
+export const getLoggedinUser = async (token: any): Promise<any> => {
+   try{
+     const response=await  axiosInstance.get(KEYCLOAK_USER_URL, {
+           headers: {
+               'Authorization': `Bearer ${token}`
+           }
+       });
+     console.log(response)
+
+   }catch (e) {
+
+   }
+
 }
 
 //

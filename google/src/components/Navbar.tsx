@@ -1,16 +1,32 @@
-import React from "react";
+import React, {useEffect} from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-import {getSSOLogoutURL} from "../hooks/useKeycloak";
+import {getLoggedinUser, getSSOLogoutURL} from "../hooks/useKeycloak";
 import {KEYCLOAK_LOGIN_URL} from "../utils/keycloak-urls";
 import useAuth from "../hooks/useAuth";
 
 const Navbar: React.FC = () => {
     const {accessToken} = useAuth()
+
+    useEffect(() => {
+        const fetchUser = async (token: any) => {
+            try {
+                await getLoggedinUser(token)
+                console.log('get user called')
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
+        if (accessToken) {
+            fetchUser(accessToken)
+        }
+        // console.log('accesstoken =>', accessToken)
+    }, [accessToken]);
 
     return (
         <Box sx={{flexGrow: 1}}>

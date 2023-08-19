@@ -5,7 +5,7 @@ import useAuth from "../hooks/useAuth";
 
 
 const Profile: React.FC = () => {
-    const { setAccessToken, setRefreshToken, setIdToken} = useAuth()
+    const {setAccessToken, setRefreshToken, setIdToken} = useAuth()
     const navigate = useNavigate();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
@@ -15,7 +15,7 @@ const Profile: React.FC = () => {
 
     const isMounted = useRef()
 
-    useEffect( () => {
+    useEffect(() => {
         if (isMounted.current) return
 
         const fetchData = async () => {
@@ -25,11 +25,11 @@ const Profile: React.FC = () => {
                     code: authorizationCode,
                 }
 
-                const { data } = await getKeycloakToken(values)
+                const {data} = await getKeycloakToken(values)
                 setAccessToken(data?.access_token)
                 setRefreshToken(data?.refresh_token)
                 setIdToken(data?.id_token)
-                navigate('/profile', { replace: true });
+                navigate('/profile', {replace: true});
             } catch (e) {
                 console.log(e)
             }
