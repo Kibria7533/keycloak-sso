@@ -62,9 +62,17 @@ docker compose up -d
 ### <span style="color:Teal">Keycloak Realm Export & Import</span>
 - <strong style="color:Gray">Manual export : </strong> Login keycloak > select targeted realm > realm settings > action (top right conner) > partial export > check all options > click on export.     
 <br>
-- <strong style="color:Gray">Auto export using kc.sh: </strong> Just run ```keycloak_export.sh``` from the root directory.  
-    <br>
 - <strong style="color:Gray">Manual import : </strong> Login keycloak > select targeted realm > realm settings > action (top right conner) > partial import > select file > check all boxes > select overwrite from dropdown > click on import.   
-<br>
-- <strong style="color:Gray">Auto import by docker compose : </strong> Just move the exported json file to keycloak folder, docker compose will automatically import the realm configurations.
+    <br>
+- <strong style="color:Gray">Auto export using kc.sh : </strong> Just run ```keycloak_export.sh``` from the project root directory.  
+    <br>
+- <strong style="color:Gray">Auto import using docker compose : </strong> Just move the exported json file to keycloak folder, docker compose will automatically import the realm configurations.
   We have configured volumes inside docker compose file for auto importing realm configurations.
+
+## <span style="color:Teal">Keycloak APIS</span>
+## User
+### Get User Token
+- **URL:** `/realms/{realm_name}/protocol/openid-connect/token?client_id=&client_secret=&grant_type='password'&username=&password=`
+- **Method:** POST
+- **Query Parameters:** ```client_id```,```client_secret``` , ```grant_type='password'```, ```username```, ```password```
+- **Description:** username and password is admin username and password.
