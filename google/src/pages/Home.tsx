@@ -40,7 +40,7 @@ const Home: React.FC = () => {
         isMounted.current = true
     }, []);
 
-    return <div>This is the Home page.</div>;
+    return <h2>Home -</h2>;
 };
 
 export default Home;
