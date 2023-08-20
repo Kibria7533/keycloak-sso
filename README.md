@@ -8,6 +8,10 @@ docker compose up --build -d
 ```bash
 docker compose down
 ```
+* export realm
+```bash
+./keycloak_export.sh
+```
 
 ## <span style="color:Teal">Documents</span>
 

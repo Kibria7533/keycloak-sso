@@ -1,0 +1,55 @@
+{
+  "realm" : "google",
+  "users" : [ {
+    "id" : "4d700bf8-fa83-40c7-b1fa-70a03e1bf3cf",
+    "createdTimestamp" : 1692522989518,
+    "username" : "admin",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "My first name",
+    "lastName" : "My last name",
+    "email" : "admin@admin.com",
+    "credentials" : [ {
+      "id" : "2c163a20-0140-4064-b1ca-22827638556b",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1692522999874,
+      "secretData" : "{\"value\":\"FtqSl7Lpqdcg5dieSb2eM7zOg4isDfvndsC+bBxsQG4=\",\"salt\":\"BRMfdTUr4XEG9xVLyq6Qqg==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-google" ],
+    "clientRoles" : {
+      "realm-management" : [ "view-identity-providers", "view-users", "manage-events", "manage-identity-providers", "view-events", "manage-realm", "view-realm", "manage-users", "query-users", "view-clients", "realm-admin", "create-client", "impersonation", "query-clients", "query-groups", "manage-clients", "query-realms", "view-authorization", "manage-authorization" ],
+      "broker" : [ "read-token" ],
+      "account" : [ "manage-account-links", "view-groups", "view-profile", "view-consent", "view-applications", "delete-account", "manage-account", "manage-consent" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "17499cc5-bd57-431c-b975-48504d2a3703",
+    "createdTimestamp" : 1692523067772,
+    "username" : "google",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "Google",
+    "lastName" : "Mama",
+    "email" : "google@google.com",
+    "credentials" : [ {
+      "id" : "9721d182-283d-49e1-8d7d-2563d97d06d6",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1692523078143,
+      "secretData" : "{\"value\":\"gfeScVTmGjB4nNBTLegN8CuHc3DOjOWA8C08Z3j6Pf8=\",\"salt\":\"uvRYmXZ6hMaAu6VCuW4IKQ==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-google" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  } ]
+}

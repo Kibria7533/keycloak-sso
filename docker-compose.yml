@@ -47,7 +47,7 @@ services:
     ports:
       - "7020:8080"
     networks:
-      - mysql_network # network must be same with mysql network.
+      - mysql_network # same as mysql network.
 #    entrypoint: ["/opt/keycloak/bin/kc.sh", "start-dev"]
     command: start-dev --import-realm
     environment:
@@ -63,7 +63,7 @@ services:
       KC_DB_USERNAME: root # db_user
       KC_DB_PASSWORD: root # db_pass
     volumes:
-      - ./keycloak:/opt/keycloak/data/import # Mapped local keycloak to container import folder. We just need to put our all config file in ./keycloak folder.
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import # Mapped local keycloak to container import folder. We just need to put our all config file in ./keycloak folder.
 
   mailhog:
     container_name: mailhog
@@ -72,7 +72,7 @@ services:
       - "1025:1025"
       - "8025:8025"
     networks:
-      - mysql_network # network must be same with mysql network.
+      - mysql_network # same as mysql network.
     volumes:
       - mailhog_volume:/app/data
 
