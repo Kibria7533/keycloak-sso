@@ -1,16 +1,11 @@
-import {Inject, Injectable, NotFoundException} from '@nestjs/common';
+import {Injectable, NotFoundException} from '@nestjs/common';
 import axios from 'axios';
-import {AsyncLocalStorage} from "async_hooks";
 import {KEYCLOAK_CLIENT_ID, KEYCLOAK_CLIENT_SECRET, KEYCLOAK_HOST_URL, KEYCLOAK_REALM} from "../../utils/constants";
+import {AuthUser} from "../../middlewares/user/auth-user";
 
 
 @Injectable()
 export class AuthService {
-
-    @Inject()
-    private readonly als: AsyncLocalStorage<any>
-
-
     getKeycloakTokenURL = () => {
         return `${KEYCLOAK_HOST_URL}/realms/${KEYCLOAK_REALM}/protocol/openid-connect/token`;
     }
@@ -43,18 +38,9 @@ export class AuthService {
         }
     }
 
-    async getUser(req: any, res: any) {
-        try {
-            const user = this.als.getStore();
-            if (!user) throw new NotFoundException("Profile data not found")
-            // console.log('user profile =>', user)
-            return user
-        } catch (error) {
-            console.log('Profile data error =>', error)
-            throw error
-        }
-
+    async getProfile() {
+        const user = AuthUser.get()
+        if (!user) throw new NotFoundException("Profile not found")
+        return user
     }
-
-
 }

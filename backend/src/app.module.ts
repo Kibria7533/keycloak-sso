@@ -5,11 +5,10 @@ import {AuthModule} from "./module/auth/auth.module";
 import {APP_INTERCEPTOR} from "@nestjs/core";
 import {ResponseInterceptor} from "./interceptor/response.interceptor";
 import {JwtMiddleware} from "./middlewares/jwt.middleware";
-import {AlsModule} from "./module/als/als.module";
-import {CacheModule} from "./module/cache/cache.module";
+import {IdpModule} from "./module/idp/idp.module";
 
 @Module({
-    imports: [AuthModule, AlsModule, CacheModule],
+    imports: [AuthModule, IdpModule],
     controllers: [AppController],
     providers: [AppService,
         {
@@ -24,7 +23,7 @@ export class AppModule {
         consumer
             .apply(JwtMiddleware)
             .forRoutes(
-                {path: '/auth/user', method: RequestMethod.ALL},
+                {path: '/auth/profile', method: RequestMethod.ALL},
             );
     }
 

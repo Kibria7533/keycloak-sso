@@ -8,6 +8,7 @@ export const BACKEND_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 // export const KEYCLOAK_TOKEN_URL: string = KEYCLOAK_HOST + "/realms/" + KEYCLOAK_REALM + "/protocol/openid-connect/token"
 export const KEYCLOAK_TOKEN_URL: string = BACKEND_BASE_URL + "/auth/token"
+export const KEYCLOAK_PROFILE_URL: string = BACKEND_BASE_URL + "/auth/profile"
 export const KEYCLOAK_USER_URL: string = BACKEND_BASE_URL + "/auth/user"
 
 export const KEYCLOAK_LOGIN_URL: string = KEYCLOAK_HOST + "/realms/" + KEYCLOAK_REALM + "/protocol/openid-connect/auth?" +

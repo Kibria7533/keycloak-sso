@@ -71,6 +71,8 @@ services:
     ports:
       - "1025:1025"
       - "8025:8025"
+    networks:
+      - mysql_network # network must be same with mysql network.
     volumes:
       - mailhog_volume:/app/data
 

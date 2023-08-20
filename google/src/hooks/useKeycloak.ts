@@ -4,9 +4,9 @@ import {
     KEYCLOAK_CLIENT_ID,
     KEYCLOAK_HOST,
     KEYCLOAK_KEYCLOAK_LOGOUT_REDIRECT_URI,
+    KEYCLOAK_PROFILE_URL,
     KEYCLOAK_REALM,
-    KEYCLOAK_TOKEN_URL,
-    KEYCLOAK_USER_URL
+    KEYCLOAK_TOKEN_URL
 } from "../utils/keycloak-urls";
 
 export const axiosInstance = axios.create({
@@ -44,52 +44,11 @@ export const getKeycloakToken = async (values: any): Promise<any> => {
     });
 }
 
-export const getLoggedinUser = async (token: any): Promise<any> => {
-   try{
-     const response=await  axiosInstance.get(KEYCLOAK_USER_URL, {
-           headers: {
-               'Authorization': `Bearer ${token}`
-           }
-       });
-     console.log(response)
-
-   }catch (e) {
-
-   }
-
+export const getProfile = async (token: string): Promise<any> => {
+    return axiosInstance.get(KEYCLOAK_PROFILE_URL, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: `Bearer ${token}`
+        },
+    });
 }
-
-//
-// export const getSSOTokenURL = async (redirectUrl: any, authorizationCode: any): Promise<any> => {
-//     try {
-//         const expirationDate = new Date();
-//         expirationDate.setDate(expirationDate.getDate() + 7);
-//
-//         console.log(KEYCLOAK_TOKEN_URL)
-//         console.log(KEYCLOAK_TOKEN_URL == "http://localhost:5000/auth/token")
-//
-//         const {data} = await axios.post(
-//             KEYCLOAK_TOKEN_URL,
-//             {
-//                 redirect_uri: encodeURI(redirectUrl.toString()),
-//                 code: authorizationCode,
-//             }
-//         );
-//         return data
-//     } catch (error) {
-//         console.error('Error fetching auth token:', error);
-//     }
-// }
-
-
-// export const getSSOLoginURL = () => {
-//     return `${KEYCLOAK_HOST}/realms/${KEYCLOAK_REALM}/protocol/openid-connect/auth?` +
-//         `response_type=code&client_id=${KEYCLOAK_CLIENT_ID}&scope=openid&redirect_uri=${encodeURI(KEYCLOAK_REDIRECT_URI)}`;
-// }
-
-// export const keycloakLogin = async (redirectUrl: any, authorizationCode: any): Promise<any> => {
-//     return axiosInstance.post( KEYCLOAK_TOKEN_URL, {
-//         redirect_uri: encodeURI(redirectUrl.toString()),
-//         code: authorizationCode
-//     });
-// }

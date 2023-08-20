@@ -5,21 +5,21 @@ export const CONST_ID_TOKEN = 'id_token';
 export const saveAccessToken = (token: string): void => {
     token && localStorage.setItem(CONST_ACCESS_TOKEN, token);
 }
-export const getAccessToken = (): string | null => {
+export const getAccessToken = (): any => {
     return localStorage.getItem(CONST_ACCESS_TOKEN);
 }
 
 export const saveRefreshToken = (token: string): void => {
     token && localStorage.setItem(CONST_REFRESH_TOKEN, token);
 }
-export const getRefreshToken = (): string | null => {
+export const getRefreshToken = (): any => {
     return localStorage.getItem(CONST_REFRESH_TOKEN);
 }
 
 export const saveIdToken = (token: string): void => {
     token && localStorage.setItem(CONST_ID_TOKEN, token);
 }
-export const getIdToken = (): string | null => {
+export const getIdToken = (): any => {
     return localStorage.getItem(CONST_ID_TOKEN);
 }
 

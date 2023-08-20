@@ -1,16 +1,18 @@
 import {Controller, Get, Inject, Post, Req, Res} from "@nestjs/common";
 import {AuthService} from "./auth.service";
 import {Request, Response} from "express";
+import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 
+@ApiTags("auth")
+@ApiBearerAuth()
 @Controller('auth')
 export class AuthController {
     @Inject()
     private readonly authService: AuthService;
 
-    @Get('user')
-    async getUserInfo(@Req() req: Request, @Res() res: Response) {
-        return this.authService.getUser(req, res);
-
+    @Get('profile')
+    async getProfile() {
+        return this.authService.getProfile();
     }
 
     @Post('token')

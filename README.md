@@ -1,9 +1,9 @@
 ## <span style="color:Teal">Shortcut Commands</span>
 ```bash
-docker compose up
+docker compose up -d
 ```
 ```bash
-docker compose up --build
+docker compose up --build -d
 ```
 ```bash
 docker compose down
@@ -33,7 +33,7 @@ docker run -d --name db_mysql -p 3306:3306 -p 33060:33060 --network mysql_networ
 ### <span style="color:Teal">Install Keycloak & mailhog</span>
 - Run below command to install keycloak and mailhog
 ```bash
-docker compose up
+docker compose up -d
 ```
  
 ### <span style="color:Teal">Keycloak Realm Export & Import</span>

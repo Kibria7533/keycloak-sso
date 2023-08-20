@@ -1,5 +1,5 @@
 export const ACTION_SET_ACCESS_TOKEN: string = 'ACTION_SET_ACCESS_TOKEN'
 export const ACTION_SET_REFRESH_TOKEN: string = 'ACTION_SET_REFRESH_TOKEN'
 export const ACTION_SET_ID_TOKEN: string = 'ACTION_SET_ID_TOKEN'
+export const ACTION_SET_USER: string = 'ACTION_SET_USER'
 export const ACTION_LOG_OUT: string = 'ACTION_LOG_OUT'
-export const ACTION_SIGN_OUT: string = 'ACTION_SIGN_OUT'

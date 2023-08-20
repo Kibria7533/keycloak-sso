@@ -1,6 +1,12 @@
 import React, {Context, createContext, ReactNode, useReducer} from 'react'
 import AuthReducer from './AuthReducer'
-import {ACTION_LOG_OUT, ACTION_SET_ACCESS_TOKEN, ACTION_SET_ID_TOKEN, ACTION_SET_REFRESH_TOKEN} from './AuthActions'
+import {
+    ACTION_LOG_OUT,
+    ACTION_SET_ACCESS_TOKEN,
+    ACTION_SET_ID_TOKEN,
+    ACTION_SET_REFRESH_TOKEN,
+    ACTION_SET_USER
+} from './AuthActions'
 import {
     clearLoginInfo,
     getAccessToken,
@@ -12,12 +18,14 @@ import {
 } from "../../utils/storage";
 
 interface AuthContextType {
-    accessToken: string | null,
-    refreshToken: string | null,
-    idToken: string | null,
+    accessToken: string,
+    refreshToken: string,
+    idToken: string,
+    user: object,
     setAccessToken: (token: string) => void,
     setRefreshToken: (token: string) => void,
     setIdToken: (token: string) => void,
+    setUser: (user: object) => void,
     signOut: (next: () => {}) => void
 }
 
@@ -29,12 +37,14 @@ const initialState: AuthContextType = {
     accessToken: getAccessToken(),
     refreshToken: getRefreshToken(),
     idToken: getIdToken(),
+    user: {},
     setAccessToken: () => {
     },
     setRefreshToken: () => {
     },
     setIdToken: () => {
     },
+    setUser: () => {},
     signOut: (next: () => {}) => {
     }
 }
@@ -68,6 +78,13 @@ export const AuthContextProvider: React.FC<AuthProviderProps> = ({children}) => 
         })
     }
 
+    const setUser = (user: object): void => {
+        dispatch({
+            type: ACTION_SET_USER,
+            payload: user,
+        })
+    }
+
     const signOut = (next: () => {}): void => {
         clearLoginInfo()
         dispatch({
@@ -83,7 +100,9 @@ export const AuthContextProvider: React.FC<AuthProviderProps> = ({children}) => 
         setRefreshToken,
         idToken: state.idToken,
         setIdToken,
-        signOut: signOut
+        user: state.user,
+        setUser,
+        signOut
     }
 
     return (
