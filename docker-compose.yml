@@ -64,6 +64,7 @@ services:
       KC_DB_PASSWORD: root # db_pass
     volumes:
       - ./keycloak/realm-export.json:/opt/keycloak/data/import # Mapped local keycloak to container import folder. We just need to put our all config file in ./keycloak folder.
+      - ./keycloak/themes/:/opt/keycloak/themes
 
   mailhog:
     container_name: mailhog
