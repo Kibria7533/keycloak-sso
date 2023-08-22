@@ -10,7 +10,7 @@ export class IdpController {
     @Inject()
     private readonly idpService: IdpService;
 
-    @Get('getToken')
+    @Get('getAdminToken')
     async getToken() {
         return this.idpService.getIdpToken(KEYCLOAK_REALM)
     }
