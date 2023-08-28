@@ -45,7 +45,7 @@ services:
     image: quay.io/keycloak/keycloak:22.0.1
 #    restart: unless-stopped
     ports:
-      - "7020:8080"
+      - "8180:8080"
     networks:
       - mysql_network # same as mysql network.
 #    entrypoint: ["/opt/keycloak/bin/kc.sh", "start-dev"]

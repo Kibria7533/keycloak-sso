@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import Keycloak from "keycloak-js";
 
 const keycloakConfig: Keycloak.KeycloakConfig = {
-    url: 'http://localhost:7020/',
+    url: 'http://localhost:8180/',
     realm: 'google',
     clientId: 'google-cli',
 };
