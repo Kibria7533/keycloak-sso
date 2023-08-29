@@ -12,6 +12,10 @@ docker compose down
 ```bash
 ./keycloak_export.sh
 ```
+* run extension
+```bash
+mvn -Pextension clean install
+```
 
 ## <span style="color:Teal">Documents</span>
 
