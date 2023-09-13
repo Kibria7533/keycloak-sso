@@ -49,7 +49,10 @@ services:
     networks:
       - mysql_network # same as mysql network.
 #    entrypoint: ["/opt/keycloak/bin/kc.sh", "start-dev"]
-    command: start-dev --import-realm --spi-events-listener-sysout-exclude-events=CODE_TO_TOKEN,REFRESH_TOKEN
+    command:
+      - start-dev
+      - --import-realm --spi-events-listener-sysout-exclude-events=CODE_TO_TOKEN,REFRESH_TOKEN # For running events-listener-sysout extension
+      - --spi-action-token-handler-external-app-notification-hmac-secret=aSqzP4reFgWR4j94BDT1r+81QYp/NYbY9SBwXtqV1ko= # For running action-token-authenticator extension
     environment:
       # Keycloak Config
       KC_LOG_LEVEL: INFO # FATAL | ERROR | WARN | WARN | INFO | DEBUG | TRACE | ALL | OFF
