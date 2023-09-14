@@ -44,6 +44,7 @@ public class SysoutEventListenerProvider implements EventListenerProvider {
         if (excludedEvents != null && excludedEvents.contains(event.getType())) {
             // Ignore excluded events. Just log them for illustration purposes without any details.
             System.out.println("USER EVENT EXCLUDED: " + event.getType());
+            System.out.println("USER EVENT: " + toString(event));
         } else {
             System.out.println("USER EVENT: " + toString(event));
         }
