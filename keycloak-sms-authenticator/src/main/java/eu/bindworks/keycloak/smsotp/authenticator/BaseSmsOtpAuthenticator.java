@@ -26,6 +26,18 @@ abstract public class BaseSmsOtpAuthenticator implements Authenticator {
     @Override
     public void authenticate(AuthenticationFlowContext context) {
         try {
+            // Loggin login user info
+//            System.out.println("Login info => ");
+//            Map<String, String[]> formParameters = context.getHttpRequest().getDecodedFormParameters();
+
+            // Iterate over the form parameters and print them to the console.
+//            for (String key : formParameters.keySet()) {
+//                System.out.println(key + ": " + formParameters.get(key)[0]);
+//                logger.tracef("User Login Info %s : %s", key, formParameters.get(key)[0]);
+//            }
+
+            logger.tracef("Attempt to SMS OTP code %s", context.getHttpRequest());
+
             KeycloakSession session = context.getSession();
             RealmModel realm = context.getRealm();
             UserModel user = context.getUser();
