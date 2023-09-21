@@ -55,6 +55,7 @@ public class ExternalAppAuthenticator implements Authenticator {
 
     @Override
     public void authenticate(AuthenticationFlowContext context) {
+        logger.debugv("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL %d", context);
         String externalApplicationUrl = null;
         String applicationId = null;
         if (context.getAuthenticatorConfig() != null) {
@@ -109,6 +110,7 @@ public class ExternalAppAuthenticator implements Authenticator {
 
     @Override
     public void action(AuthenticationFlowContext context) {
+        logger.debugv("GGGGGGGGGGGGGGGGGGGGGGGGGGG");
         final AuthenticationSessionModel authSession = context.getAuthenticationSession();
         if (! Objects.equals(authSession.getAuthNote(ExternalApplicationNotificationActionTokenHandler.INITIATED_BY_ACTION_TOKEN_EXT_APP), "true")) {
             authenticate(context);
