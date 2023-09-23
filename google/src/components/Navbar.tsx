@@ -30,8 +30,8 @@ const Navbar: React.FC = () => {
                             )
                         }
                         {
-                            !accessToken && (
-                                <Button color="inherit">Signup</Button>
+                            !accessToken && (<Link href="/signup" underline="none">
+                                    <Button color="inherit" sx={{color: "#fff"}}>Signup</Button></Link>
                             )
                         }
 

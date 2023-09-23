@@ -2,17 +2,12 @@ import {AsyncLocalStorage} from "async_hooks";
 
 interface AuthUser {
     id: string,
-    createdTimestamp: number,
     username: string,
-    enabled: boolean,
-    totp: boolean,
-    emailVerified: boolean,
     firstName: string,
     lastName: string,
-    disableableCredentialTypes: Array<any>,
-    requiredActions: Array<any>,
-    notBefore: number,
-    access: any
+    role?: any
+
+
 }
 
 export const AuthUser = {
@@ -22,5 +17,11 @@ export const AuthUser = {
     },
     set(user: AuthUser): any {
         return this.storage.enterWith(user);
+    },
+    addRole(role: any): void {
+        const user = this.get();
+        if (user && Array.isArray(role)) user.roles = role
+        else user.roles.push(role);
+        this.set(user);
     },
 };

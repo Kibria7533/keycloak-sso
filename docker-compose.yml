@@ -40,7 +40,7 @@ services:
       - ./keycloak/realm-export.json:/opt/keycloak/data/import # Mapped local keycloak to container import folder. We just need to put our all config file in ./keycloak folder.
       - ./keycloak/themes/:/opt/keycloak/themes
 #      - ./keycloak/providers/:/opt/keycloak/providers
-      - ./keycloak-quickstarts-22.0.3/extension/action-token-authenticator/target/action-token-example.jar:/opt/keycloak/providers/action-token-example.jar
+#      - ./keycloak-quickstarts-22.0.3/extension/action-token-authenticator/target/action-token-example.jar:/opt/keycloak/providers/action-token-example.jar
 
   mailhog:
     container_name: mailhog
