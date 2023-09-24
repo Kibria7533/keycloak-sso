@@ -1,0 +1,1 @@
+start cmd.exe /c "yarn start:dev"

@@ -1,7 +1,8 @@
-import {Controller, Get, Inject, Post, Req, Res} from "@nestjs/common";
+import {Body, Controller, Get, Inject, Post, Req, Res} from "@nestjs/common";
 import {AuthService} from "./auth.service";
 import {Request, Response} from "express";
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
+import {CreateUserDto} from "../idp/dtos/createUser.dto";
 
 @ApiTags("auth")
 @ApiBearerAuth()

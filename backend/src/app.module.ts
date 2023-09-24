@@ -24,6 +24,7 @@ export class AppModule {
             .apply(JwtMiddleware)
             .forRoutes(
                 {path: '/auth/profile', method: RequestMethod.ALL},
+                {path: '/idp/profile', method: RequestMethod.GET}
             );
     }
 
