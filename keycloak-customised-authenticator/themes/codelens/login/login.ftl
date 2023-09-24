@@ -9,7 +9,7 @@
                     <div class="panel panel-info" >
                         <div class="panel-heading">
                             <div class="panel-title">Sign In</div>
-                            <#if !realm.resetPasswordAllowed>
+                            <#if realm.resetPasswordAllowed>
                                 <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="${url.loginResetCredentialsUrl}">${msg("doForgotPassword")}</a></div>
                             </#if>
                         </div>
