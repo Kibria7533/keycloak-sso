@@ -80,3 +80,26 @@ docker compose up -d
 - **Method:** POST
 - **Query Parameters:** ```client_id```,```client_secret``` , ```grant_type='password'```, ```username```, ```password```
 - **Description:** username and password is admin username and password.
+
+## GET USER 
+Get Admin Token :
+url: http://host_url/realms/google/protocol/openid-connect/token
+
+body:
+- client_id = {your_client_id}
+- client_secret = {your_client_secret}
+- grant_type = "password"
+- username = "admin"
+- password = {admin_pass}
+
+
+  Headers:
+- Accept = application/json
+- Content-Type = application/x-www-form-urlencoded
+
+Get Users :
+url: http://host_url/admin/realms/google/users
+
+pass admin token as Authorization bearer token in this requester.
+
+
